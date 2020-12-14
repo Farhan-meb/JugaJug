@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+{% include 'blog/snippets/after_list_tab.html' %}
+
+    <div class="card" style="background-color: #113e42;">
+        <div class="card-body" >
+            <h3 class="text-center text-uppercase monospace font-weight-bold">
+                    u s e r s
+            </h3>
+            <div class="table-responsive p-1">
+                <table class="table table-bordered table-striped text-center" style="color:white;">
+                    <thead >
+                        <tr>
+                            <th > #</th>
+                            <th width="50%"><i class="fa fa-user dark"  aria-hidden="true"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profile in profiles %}
+                            <tr>
+                                <td> {{ forloop.counter }} </td>
+                                <td><a href="#"> <img
+                                           class="rounded-circle mr-2"
+                                           style="width: 20px; height: 20px;"
+                                           src="{{ profile.user.profile.profile_picture.url }}">
+                                {% if profile.user == user %}
+                                <a class="mr-2 text-monospace font-weight-bold text-white" href="{% url 'user-profile-current' profile.user.username %}">{{ profile.user }}</a>
+                                {% else %}
+                                <a class="mr-2 text-monospace font-weight-bold text-white" href="{% url 'user-profile' profile.user.username %}">{{ profile.user }}</a>
+                                {% endif %}
+                                </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+
+{% if user.is_authenticated %}
+<div class="mb-4 d-flex">
+
+    <div class="w-100" style="color: #113e42;" >
+        <a href="{% url 'blog:blog-create' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">
+            <i class="fa fa-plus mr-1" style="color: primary;"></i> New Post
+        </a>
+    </div>
+</div>
+{% endif %}
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card" style="background-color: #113e42;">
+            <div class="card-body">
+                <h4 class="text-center text-uppercase monospace font-weight-bold">P r o f i l e </h4>
+                <h4 class="text-center"><img class="mr-2" style="width: 215px; height: 215px;" src="{{ profile.profile_picture.url }}"></h4>
+                <hr>
+                <h7 class=" text-uppercase text-monospace font-weight-bold"><i class="fa fa-user dark center"  aria-hidden="true"></i> {{ profile.user.username }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-envelope" aria-hidden="true"></i> {{ profile.user.email }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-university" aria-hidden="true"></i> {{ profile.institution }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class='fas fa-city'></i> {{ profile.location }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Following (<a href="{% url 'user-follows' user.username %}">{{ profile.following }}</a>)</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Followers (<a href="{% url 'user-followers' user.username %}">{{ profile.followers }}</a>)</h7>
+                <div class="w-100" style="color: #113e42;" >
+                    <br>
+                    <a href="{% url 'accounts:update-profile' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-8">
+        {% comment %} Breadcrumb {% endcomment %}
+
+        {% for blog in blogs %}
+            <div class="card mb-2" style="background-color: #113e42;">
+                <div class="card-body">
+
+                    <p>
+                        <img class="rounded-circle mr-2" style="width: 30px; height: 30px;" src="{{ blog.author.profile.profile_picture.url }}">
+                        <a class="mr-2 text-white" href="#">{{ blog.author }}</a>
+                        <small class="text-muted">{{ blog.created_at|date:"F d, Y" }}</small>
+                        <hr/>
+                        <div class="border-bottom">
+                            <h2 class="font-weight-bold">{{ blog.title }}</h2>
+                            {{ blog.content|safe|linebreaks }}
+                        </div>
+
+                    </p>
+
+                    <div >
+                        <a href="#" onClick="document.getElementById('likebutton').submit()"><i
+                            class="fas fa-thumbs-up"></i></a> {{blog.likes}} | <a href="#"
+                                                                              onClick="document.getElementById('dislikebutton').submit()"><i
+                            class="fas fa-thumbs-down"></i></a> {{blog.dislikes}} | <a href="{% url 'blog:blog-details' blog.id %}">Comments</a> ({{ blog.number_of_comments }})
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <hr/>
+    </div>
+</div>
+
+{% include 'blog/snippets/paginations.html' %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} Delete Blog {% endblock %}
+
+{% block content %}
+    {% comment %} Breadcrumb {% endcomment %}
+    <br><br><br>
+    <div class="card m-2" style="background-color: #113e42;">
+        <div class="card-header">
+            Delete Blog
+        </div>
+        <div class="card-body">
+            <h4 class="mb-3"> Are you sure, you want to delete this blog?</h4>
+
+            <form method="POST">
+                {% csrf_token %}
+                <a class="btn btn-secondary" href="{% url 'blog-list' %}"> Discard </a>
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

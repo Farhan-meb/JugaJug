@@ -1,0 +1,80 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+{% include 'blog/snippets/after_list_tab.html' %}
+
+
+<div class="row">
+    <!--
+    <div class="col-sm-3">
+        <div class="card">
+            <div class="card-body">
+                <h4><a href="#">Profile </a></h4>
+                <br/>
+                <form method="POST" action="#" enctype="multipart/form-data">
+                    <div class="form-group">
+                        profile section
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h4> Users </h4>
+                <br/>
+                <form method="POST" action="#" enctype="multipart/form-data">
+                    <div class="form-group">
+                        Users section
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="col-sm-12">
+        {% comment %} Breadcrumb {% endcomment %}
+
+        {% for blog in blogs %}
+            <div class="card mb-2 " style="background-color: #113e42;">
+                <div class="card-body">
+
+                   <p>
+                        <img class="rounded-circle mr-2" style="width: 30px; height: 30px;" src="{{ blog.author.profile.profile_picture.url }}">
+                        {% if blog.author == user %}
+                            <a class="mr-2 text-white" href="{% url 'user-profile-current' user.username %}">{{ blog.author }}</a>
+                        {% else %}
+                            <a class="mr-2 text-white" href="{% url 'user-profile' blog.author.profile.user.username %}">{{ blog.author }}</a>
+                        {% endif %}
+                        <small class="text-muted">{{ blog.created_at|date:"F d, Y" }}</small>
+                        <hr/>
+                        <div class="border-bottom">
+                            <h2 class="font-weight-bold">{{ blog.title }}</h2>
+                            <p>
+                                {{ blog.truncated_content|safe|linebreaks }}
+                                {% if blog.content|length > 500 %}
+                                    <a class="read-more" href="{% url 'blog:blog-details' blog.id %}"> Read More </a>
+                                {% endif %}
+                            </p>
+
+                        </div>
+
+                    </p>
+                    <div>
+                        <a href="#" onClick="document.getElementById('likebutton').submit()"><i
+                            class="fas fa-thumbs-up"></i></a> {{blog.likes}} | <a href="#"
+                                                                              onClick="document.getElementById('dislikebutton').submit()"><i
+                            class="fas fa-thumbs-down"></i></a> {{blog.dislikes}} | <a href="{% url 'blog:blog-details' blog.id %}">Comments</a> ({{ blog.number_of_comments }})
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <hr/>
+    </div>
+</div>
+
+{% include 'blog/snippets/paginations.html' %}
+{% endblock %}

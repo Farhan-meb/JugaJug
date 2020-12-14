@@ -1,0 +1,37 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+<br>
+{% block content %}
+    {% comment %} Breadcrumb {% endcomment %}
+    <br>
+
+
+    <div class="card" style="background-color: #113e42;">
+        <div class="card-header text-center" style="background-color: #113e42;">
+            <strong> {{ card_header }} </strong>
+        </div>
+
+        <div class="card-body" style="background-color: #113e42;">
+            <form method="POST" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <fieldset >
+                    {{ form | crispy }}
+                    {{ form.media }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit"> {{ operation }} </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script >
+         $(document).ready(function () {
+            $(".django-ckeditor-widget").css("display", "block")
+         });
+    </script>
+
+
+{% endblock %}

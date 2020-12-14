@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <br>
+
+    {% include 'blog/snippets/list_tabs.html' %}
+    <br><br><br>
+    <div class="row">
+    <div class="col-sm-3">
+        <div class="card" style="background-color: #113e42;">
+            <div class="card-body">
+                <h4 class="text-center text-uppercase monospace font-weight-bold">P r o f i l e </h4>
+                <h4 class="text-center"><img class="mr-2" style="width: 215px; height: 215px;" src="{{ user.profile.profile_picture.url }}"></h4>
+                <hr>
+                <h7 class=" text-uppercase text-monospace font-weight-bold"><i class="fa fa-user dark center"  aria-hidden="true"></i> {{ user.profile.user.username }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-envelope" aria-hidden="true"></i> {{ user.profile.user.email }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-university" aria-hidden="true"></i> {{ user.profile.institution }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class='fas fa-city'></i> {{ user.profile.location }}</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Following (<a href="{% url 'user-follows' user.username %}">{{ user.profile.following }}</a>)</h7>
+                <br>
+                <h7 class=" text-monospace font-weight-bold"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Followers (<a href="{% url 'user-followers' user.username %}">{{ user.profile.followers }}</a>)</h7>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="content-section">
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Update Your Profile</legend>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info float-right" type="submit"><a href="{% url 'user-profile-current' user.username %}"></a>Update</button>
+          </div>
+      </form>
+    </div>
+    </div>
+{% endblock %}

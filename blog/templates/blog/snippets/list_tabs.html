@@ -1,0 +1,26 @@
+<ul class="nav nav-pills nav-fill mb-4">
+    <li class="nav-item border border-dark">
+        <a class="nav-link {{ dashboard_home_tab }}" href="{% url 'blog-list' %}"><i class="fa fa-home"  aria-hidden="true"></i></a>
+    </li>
+    <li class="nav-item border border-dark">
+        <a class="nav-link {{ dashboard_learning_tab }}" href="#"><i class='fas fa-laptop-code'></i></a>
+    </li>
+    <li class="nav-item border border-dark">
+        <a class="nav-link {{ dashboard_chat_tab }}" href="#">
+            <i class='fab fa-facebook-messenger fa-lg'></i><br/>
+        </a>
+    </li>
+    <li class="nav-item border  border-dark">
+        <a class="nav-link {{ dashboard_users_tab }}" href="{% url 'user-list' %}"><i class="fa fa-users"  aria-hidden="true"></i></a>
+    </li>
+    <li class="nav-item border border-dark">
+        <a class="nav-link {{ dashboard_profile_tab }}" href="{% url 'user-profile-current' user.username %}">
+            <i class="fa fa-user dark"  aria-hidden="true"></i>
+        </a>
+    </li>
+    <li class="nav-item border  border-dark">
+        <a class="nav-link {{ dashboard_settings_tab }}" href="{% url 'accounts:update-profile'  %}">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+        </a>
+    </li>
+</ul>
