@@ -1,14 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
 from django.contrib.auth import get_user_model
 from django.contrib import messages
-from accounts.models import Profile,Follow
-from accounts.forms import UserRegisterForm
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.urls import reverse_lazy
+from accounts.models import Profile
 from django.views.generic import (
     ListView,
-    UpdateView,
 )
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
@@ -27,7 +22,6 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'accounts/register.html', {'form': form})
-
 
 
 def profile(request):
@@ -54,7 +48,6 @@ def profile(request):
     context.update({
         'dashboard_settings_tab': 'active'
     })
-
 
     return render(request, 'accounts/profile_update.html', context)
 

@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     # 3rd party apps
     'ckeditor',
     'crispy_forms',
+
     # My apps
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
+    'chat'
 ]
 
 MIDDLEWARE = [

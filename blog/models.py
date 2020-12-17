@@ -28,6 +28,7 @@ class Post(models.Model):
     def truncated_content(self):
         return self.content if len(self.content) <= 500 else f"{self.content[:500]}...."
 
+
 class Comments(models.Model):
     Comment = models.TextField(max_length=150)
     date_posted = models.DateTimeField(auto_now_add=True)
