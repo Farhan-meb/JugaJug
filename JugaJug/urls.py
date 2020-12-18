@@ -18,12 +18,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
+    path('learning/', include('learning.urls')),
 
     #profile
     path('User/<str:username>/', UserProfileView.as_view(), name='user-profile'),
     path('User/<str:username>/Profile', CurrentUserProfileView.as_view(), name='user-profile-current'),
     path('Users/', UserListView.as_view(), name='user-list'),
 
+    #Followers-Following urls
     path('<str:username>/follows', FollowsListView.as_view(), name='user-follows'),
     path('<str:username>/followers', FollowersListView.as_view(), name='user-followers'),
 

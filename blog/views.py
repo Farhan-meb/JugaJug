@@ -124,6 +124,7 @@ class CurrentUserProfileView(ListView):
         })
         return context
 
+
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'blog/blog_form.html'
@@ -169,6 +170,7 @@ class BlogDeleteView(UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/blog_delete.html'
     success_url = reverse_lazy('blog-list')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
@@ -202,6 +204,7 @@ class BlogDetailView(DetailView):
         new_comment.save()
 #
         return self.get(self, request, *args, **kwargs)
+
 
 class FollowsListView(ListView):
     model = Follow

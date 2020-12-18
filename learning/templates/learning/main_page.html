@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+    <div class="card" style="color: black;">
+        <div class="card-body">
+            {% for tutorial in tutorials %}
+            <div class="card mb-2 " style="color: black;">
+                <div class="card-body">
+
+                   <p>
+                        <div>
+                            <h2 class="font-weight-bold text-center">{{ tutorial.title }}</h2>
+                            <hr>
+                            <p>
+                                {{ tutorial.content|safe|linebreaks}}
+                            </p>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+        <a href="#" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">
+            Next
+        </a>
+        </div>
+    </div>
+
+{% endblock %}
