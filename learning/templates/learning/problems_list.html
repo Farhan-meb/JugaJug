@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+    <div class="card" style="color: black;">
+        <div class="card-body">
+            <div class="table-responsive p-1">
+                <table id="id_problem_list" class="table  table-bordered table-hover table-striped">
+                    <thead class="text-center">
+                        <tr>
+                            <th width="8%"> # </th>
+                            <th width="92%">
+                                Name
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="text-center">
+                        {% for problem in problems %}
+                            {% for c_user in current_user %}
+                                {% if c_user.score == problem.score %}
+                                    <tr>
+                                        <td> {{ forloop.counter }} </td>
+                                        <td>
+                                            <a href="{% url 'learning:problem-details' problem.id%}">
+                                                {{ problem.name }}
+                                                {% if problem.is_solved %}
+                                                    <span class="fa fa-check text-success"> </span>
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{% url 'learning:learning-current' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white">Back</a>
+                <a href="{% url 'learning:learning-current' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">Next</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

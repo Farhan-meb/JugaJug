@@ -1,0 +1,63 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+    <div class="row" style="color: black;">
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-body">
+                    <h3> {{ problem.name }} </h3>
+                    <br />
+                    <p>
+                        <span class="text-muted"> Limits </span> {{ problem.time_limit }}s, {{ problem.memory_limit }}MB
+                    </p>
+                    <br />
+                    <p> {{ problem.statement|safe|linebreaks }} </p>
+                    <br />
+                    <h4> Input </h4>
+                    <p> {{ problem.input_section|safe|linebreaks }} </p>
+                    <br />
+                    <h4> Output </h4>
+                    <p> {{ problem.output_section|safe|linebreaks }} </p>
+                    <br />
+                    <h4> Sample </h4>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr style="border-bottom: 1px solid grey">
+                                <th width="50%"> Input </th>
+                                <th width="50%"> Output </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <!--Test Case sample goes gere -->
+                                    <td>  </td>
+                                    <td> Hello World!  </td>
+                                </tr>
+                                <br />
+                        </tbody>
+                    </table>
+                    <!--Test Case notes goes here-->
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4> Submit </h4>
+                    <br />
+                    <form method="POST" action="#" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ submission_form|crispy }}
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-primary" type="submit"> Submit </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+{% endblock %}
