@@ -1,0 +1,76 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <br>
+    {% include 'blog/snippets/list_tabs.html' %}
+    {% include 'learning/snippets/list_tabs.html' %}
+    <br>
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-responsive table-hover table-bordered text-center table-striped">
+                <thead>
+                    <tr>
+                        <th width="14%"> Submission Id </th>
+                        <th width="26%"> Problem </th>
+                        <th width="8%"> Language </th>
+                        <th width="20%"> When </th>
+                        <th width="8%"> Status </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for submission in submissions %}
+                        {% if submission.user == user %}
+                            <tr>
+                            <td>
+                                {% if submission.problem.is_protected %}
+                                    {{ submission.id }}
+                                {% else %}
+                                    <a href="#"> {{ submission.id }}</a>
+                                {% endif %}
+                            </td>
+                            <td>
+
+                                <a href="{% url 'learning:problem-details' submission.problem.id %}">
+                                    {{ submission.problem.name }}
+                                </a>
+
+                            </td>
+                             <td> C/C++ </td>
+                            <td> {{ submission.created_at|date:"H:i | d-n-Y" }} </td>
+                             {% if submission.status == 'AC' %}
+                                    <td>
+                                        <span class="badge badge-success"> {{ submission.status }} </span>
+                                    </td>
+                             {% elif submission.status == 'WA'%}
+                                    <td>
+                                        <span class="badge badge-danger"> {{ submission.status }} </span>
+                                    </td>
+                             {% elif submission.status == 'TLE'%}
+                                 <td>
+                                    <span class="badge badge-warning"> {{ submission.status }} </span>
+                                </td>
+                             {% elif submission.status == 'CE'%}
+                                 <td>
+                                     <span class="badge badge-info"> {{ submission.status }} </span>
+                                 </td>
+                             {% elif submission.status == 'MLE'%}
+                                 <td>
+                                     <span class="badge badge-dark"> {{ submission.status }} </span>
+                                 </td>
+                             {% else %}
+                                 <td>
+                                     <span class="badge badge-primary"> {{ submission.status }} </span>
+                                 </td>
+                             {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+    {% include 'blog/snippets/paginations.html' %}
+{% endblock %}

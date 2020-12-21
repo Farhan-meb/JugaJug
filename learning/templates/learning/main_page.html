@@ -3,6 +3,8 @@
 {% block content %}
 <br>
 {% include 'blog/snippets/list_tabs.html' %}
+{% include 'learning/snippets/list_tabs.html' %}
+<br>
     <div class="card" style="color: black;">
         <div class="card-body">
             {% for tutorial in tutorials %}
@@ -25,8 +27,9 @@
                 {% endfor %}
             {% endfor %}
         <a href="{% url 'learning:problem-list' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">
-            Next
+            <b>Next Tutorial</b>
         </a>
+
         </div>
     </div>
 

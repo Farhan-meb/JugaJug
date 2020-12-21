@@ -3,6 +3,8 @@
 {% block content %}
 <br>
 {% include 'blog/snippets/list_tabs.html' %}
+{% include 'learning/snippets/list_tabs.html' %}
+<br>
     <div class="card" style="color: black;">
         <div class="card-body">
             <div class="table-responsive p-1">
@@ -24,7 +26,7 @@
                                         <td> {{ forloop.counter }} </td>
                                         <td>
                                             <a href="{% url 'learning:problem-details' problem.id%}">
-                                                {{ problem.name }}
+                                                <b>{{ problem.name }}</b>
                                                 {% if problem.is_solved %}
                                                     <span class="fa fa-check text-success"> </span>
                                                 {% endif %}
@@ -36,8 +38,8 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="{% url 'learning:learning-current' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white">Back</a>
-                <a href="{% url 'learning:learning-current' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">Next</a>
+                <!---<a href="{% url 'learning:learning-current' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white">Back</a>
+                <a href="{% url 'learning:learning-current' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">Next</a>-->
             </div>
         </div>
     </div>

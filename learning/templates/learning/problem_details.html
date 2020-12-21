@@ -4,6 +4,7 @@
 {% block content %}
 <br>
 {% include 'blog/snippets/list_tabs.html' %}
+{% include 'learning/snippets/list_tabs.html' %}
     <div class="row" style="color: black;">
         <div class="col-sm-9">
             <div class="card">
@@ -48,7 +49,7 @@
                 <div class="card-body">
                     <h4> Submit </h4>
                     <br />
-                    <form method="POST" action="#" enctype="multipart/form-data">
+                    <form method="POST" action="{% url 'learning:submission-create' problem.id %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ submission_form|crispy }}
                         <div class="form-group">

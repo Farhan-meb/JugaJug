@@ -1,0 +1,14 @@
+<ul class="nav nav-pills nav-stacked">
+    <li class="nav-item border border-dark">
+        <a class="nav-link {{ dashboard_Tuto_tab }}" href="{% url 'learning:learning-current' %}">Tutorial</a>
+    </li>
+    <li class="nav-item border border-dark">
+        <a class="nav-link {{ dashboard_Prob_tab }}" href="{% url 'learning:problem-list' %}">Problems</a>
+    </li>
+    <li class="nav-item border border-dark">
+        <a class="nav-link {{ dashboard_Sub_tab }}" href="{% url 'learning:submission-list' %}">
+            Submissions<br/>
+        </a>
+    </li>
+
+</ul>
