@@ -19,6 +19,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
     path('learning/', include('learning.urls')),
+    path('char/', include('chat.urls')),
 
     #profile
     path('User/<str:username>/', UserProfileView.as_view(), name='user-profile'),

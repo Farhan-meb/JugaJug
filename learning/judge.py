@@ -85,8 +85,8 @@ def compile_c_cpp_submission(submission, language):
     Submission.objects.filter(id=submission.id).update(status=result)
 
 
-
 # Execute submitted file
 def compile_submission(submission):
+    print("Came here")
     compile_c_cpp_submission(submission, "C++")
 

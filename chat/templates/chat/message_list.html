@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+{% include 'blog/snippets/after_list_tab.html' %}
+
+<div class="container">
+         <div class="col-12 no-padding">
+             <div class="card" style="background-color: #113e42;">
+                <div class="card-body" >
+                    <h3 class="text-center text-uppercase monospace font-weight-bold">
+                    M e s s e n g e r
+                    </h3>
+                    <div class="table-responsive p-1">
+                        <table class="table table-bordered table-striped text-center" style="color:white;">
+                        <thead >
+                        <tr>
+                            <th > #</th>
+                            <th width="50%"><i class="fa fa-user dark"  aria-hidden="true"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for follow in follows %}
+                            <tr>
+                                <td> {{ forloop.counter }} </td>
+                                <td><a href="#"> <img
+                                           class="rounded-circle mr-2"
+                                           style="width: 20px; height: 20px;"
+                                           src="{{ follow.follow_user.profile.profile_picture.url }}">
+                               <a class="mr-2 text-monospace font-weight-bold text-white" href="{% url 'user-profile' follow.follow_user.profile.user.username %}">
+                                   {{ follow.follow_user.username }}
+                               </a></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+             </div>
+         </div>
+{% include 'blog/snippets/paginations.html' %}
+{% endblock %}
