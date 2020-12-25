@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Messages(models.Model):
-    message = models.CharField(max_length=50, blank=True)
+    message = models.CharField(max_length=150)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
     reciever = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
     created_at = models.DateTimeField(auto_now_add=True)

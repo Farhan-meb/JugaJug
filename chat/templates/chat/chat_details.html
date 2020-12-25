@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br>
+{% include 'blog/snippets/list_tabs.html' %}
+{% include 'blog/snippets/after_list_tab.html' %}
+    <form method="POST" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {{ form | crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-primary float-right" type="submit">Send Message</button>
+                    </div>
+    </form>
+    <br><br><br>
+
+        {% for m in messages %}
+        <div>
+
+                        {% if m.sender == user %}
+                            <div class="text-center">
+                            <p>
+                                <img class="rounded-circle mr-2 float-right" style="width: 30px; height: 30px;" src="{{ m.sender.profile.profile_picture.url }}">
+                                <a class="mr-2 text-white float-right" href="{% url 'user-profile-current' m.sender.username %}">{{ m.sender }}</a>
+                                <small class="text-muted float-left">{{ m.created_at|date:"F d, Y" }}</small>
+                                <div class="border-bottom">
+                                    <p>
+                                        {{ m.message|safe|linebreaks }}
+                                    </p>
+                                </div>
+                            </p>
+                            </div>
+                            <hr>
+                        {% else %}
+                            <div class="text-center">
+                            <p>
+                                <img class="rounded-circle mr-2 float-left" style="width: 30px; height: 30px;" src="{{ m.sender.profile.profile_picture.url }}">
+                                <a class="mr-2 text-white float-left" href="{% url 'user-profile-current' m.reciever.username %}">{{ m.sender }}</a>
+                                <small class="text-muted float-right">{{ m.created_at|date:"F d, Y" }}</small>
+                                <div class="border-bottom">
+                                    <p>
+                                        {{ m.message|safe|linebreaks }}
+                                    </p>
+                                </div>
+                            </p>
+                            </div>
+            <hr>
+                        {% endif %}
+        </div>
+        {% endfor %}
+
+{% include 'blog/snippets/paginations.html' %}
+{% endblock %}

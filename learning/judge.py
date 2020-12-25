@@ -2,7 +2,7 @@ from pathlib import Path
 import subprocess
 import resource, os
 
-from learning.models import Submission
+from learning.models import Submission,Score
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,11 +82,14 @@ def compile_c_cpp_submission(submission, language):
                 break
 
     # Update submission status
+    if result=='AC' and not Submission.objects.filter(user=submission.user,status='AC',problem = submission.problem).exists():
+        score = Score.objects.get(learner = submission.user)
+        score.score += 5
+        score.save()
     Submission.objects.filter(id=submission.id).update(status=result)
 
 
 # Execute submitted file
 def compile_submission(submission):
-    print("Came here")
     compile_c_cpp_submission(submission, "C++")
 

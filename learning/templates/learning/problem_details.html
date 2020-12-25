@@ -33,9 +33,13 @@
                         </thead>
                         <tbody>
                                 <tr>
-                                    <!--Test Case sample goes gere -->
-                                    <td>  </td>
-                                    <td> Hello World!  </td>
+                                    {% for testcase in testcases %}
+                                        <tr>
+                                            <td> {{ testcase.input_text|safe|linebreaks }} </td>
+                                            <td> {{ testcase.output_text|safe|linebreaks }} </td>
+                                        </tr>
+                                        <br />
+                                    {% endfor %}
                                 </tr>
                                 <br />
                         </tbody>

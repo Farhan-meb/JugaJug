@@ -20,7 +20,6 @@ from learning.forms import SubmissionForm
 class MainPageView(ListView):
 
     template_name = 'learning/main_page.html'
-    Score.learner = User
 
     def get_queryset(self):
         return Problem.objects.all()
@@ -84,6 +83,7 @@ class ProblemDetailView(DetailView):
             'dashboard_learning_tab': 'active',
             'dashboard_Prob_tab': 'active',
             'submission_form': SubmissionForm(),
+            'testcases': self.get_object().testcases.filter(is_sample=True)
         })
         return context
 
@@ -106,7 +106,7 @@ class SubmissionListView(ListView):
     template_name = 'learning/submission_list.html'
 
     def get_queryset(self):
-        return Submission.objects.all().order_by('-created_at')
+        return Submission.objects.filter(user = self.request.user).order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

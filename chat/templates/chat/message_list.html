@@ -16,20 +16,18 @@
                         <table class="table table-bordered table-striped text-center" style="color:white;">
                         <thead >
                         <tr>
-                            <th > #</th>
-                            <th width="50%"><i class="fa fa-user dark"  aria-hidden="true"></i></th>
+                            <th width="100%"><i class="fa fa-user dark"  aria-hidden="true"></i></th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for follow in follows %}
+                        {% for user in users %}
                             <tr>
-                                <td> {{ forloop.counter }} </td>
                                 <td><a href="#"> <img
                                            class="rounded-circle mr-2"
                                            style="width: 20px; height: 20px;"
-                                           src="{{ follow.follow_user.profile.profile_picture.url }}">
-                               <a class="mr-2 text-monospace font-weight-bold text-white" href="{% url 'user-profile' follow.follow_user.profile.user.username %}">
-                                   {{ follow.follow_user.username }}
+                                           src="{{ user.profile.profile_picture.url }}">
+                               <a class="mr-2 text-monospace font-weight-bold text-white" href="{% url 'chat:chat-details' user.id %}">
+                                   {{ user.username }}
                                </a></a></td>
                             </tr>
                         {% endfor %}

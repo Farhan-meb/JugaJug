@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     # My apps
     'accounts.apps.AccountsConfig',
     'blog.apps.BlogConfig',
-    'chat',
-    'learning'
+    'chat.apps.ChatConfig',
+    'learning.apps.LearningConfig'
 ]
 
 MIDDLEWARE = [
