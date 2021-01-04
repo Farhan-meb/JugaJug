@@ -1,12 +1,10 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <br>
-
     {% include 'blog/snippets/list_tabs.html' %}
-    <br><br><br>
+    <br><br>
     <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
         <div class="card" style="background-color: #113e42;">
             <div class="card-body">
                 <h4 class="text-center text-uppercase monospace font-weight-bold">P r o f i l e </h4>
@@ -27,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-8">
         <div class="content-section">
       <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}

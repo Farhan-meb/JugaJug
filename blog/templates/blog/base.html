@@ -18,12 +18,182 @@
     <title> {% block title %} JugaJug {% endblock %} </title>
 
     {% block extra_head %}{% endblock %}
-</head>
 
+    <style>
+    body,main{
+        background:#2b2b2b !important
+    }
+    .main-container{
+        background: #232323 !important;
+        padding:25px 50px 40px;
+        margin:20px auto 60px;
+        box-shadow: 0px 0px 20px #1d1d1d30;
+        border-radius: 5px;
+    }
+    .navbar{
+        background-color: #113e42;
+        padding: 10px 50px;
+        border-bottom: 1px solid #2a6267;
+        color: #fff;
+    }
+    .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+        color: #fff;
+        background-color: #20aebb;
+    }
+    .nav-pills .nav-link.active i{
+        color: #fff;
+    }
+    .nav-link{
+        color: #20aebb;
+        padding: 10px 10px;
+        font-size: 18px;
+            border-radius: 0px !important;
+            transition: all .3s linear
+    }
+    .nav-link:hover{
+        color:#fff;
+        background-color: #20aebb;
+    }
+    .nav-link:hover .fa,
+    .nav-link:hover .fas{
+        color:#fff;
+    }
+
+    .border-bottom{
+        border-bottom: 1px solid #757575!important
+    }
+    .fa, .fas{
+        color:#17a2b8;
+        padding:3px 5px;
+    }
+    a{
+       color:#17a2b8;
+    }
+
+    <!-- Blog-->
+
+    .blog-card hr{
+        border-top:1px solid #404040 !important;
+    }
+    .card{
+        background-color: #white !important;
+        margin:10px 0 20px !important;
+    }
+    .cardLearning {
+        background-color: #ffffff !important;
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        border: 1px solid #3c3c3c;
+        border-radius: .25rem;
+    }
+    .card {
+        background-color: #333333 !important;
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        border: 1px solid #3c3c3c;
+        border-radius: .25rem;
+    }
+    .card-header{
+        border-color:#3c3c3c;
+        border-color: #113e42;
+        background-color: #113e42;
+    }
+
+    .btn-outline-primary{
+        padding: 8px 20px;
+        font-weight: 600;
+        border-color: #20aebb;
+        color: #20aebb;
+    }
+    .btn-outline-primary:hover,
+    .btn-outline-primary:active{
+        background-color: #20aebb !important;
+        color:#fff !important;
+        border-color: #20aebb !important;
+    }
+
+    .btn-outline-primary:hover i,
+    .btn-outline-primary:active i{
+        color:#fff !important;
+    }
+
+    .form-control{
+         color: #fff !important;
+        background-color: #2b2b2b !important;
+        border: 1px solid #4c4c4c !important;
+    }
+    .form-control:focus{
+        border-color: #115e65 !important;
+        outline: 0;
+        box-shadow: none !important;
+    }
+
+    .table{
+        color:#eee !important
+    }
+    .tableLearning{
+        color:#000000 !important
+    }
+    .table-bordered td, .table-bordered th{
+        border: 1px solid #6b6b6b !important;
+    }
+    .table-bordered {
+        border:none;
+        ~border-bottom: 1px solid #6b6b6b !important;
+    }
+
+    footer{
+        margin-top:100px;
+        background: #232323 !important;
+    }
+    footer .container{
+        padding:10px 0px;
+        background: #232323 !important;
+    }
+
+    .message-wrapper{
+        display:flex;
+        justify-content:space-around;
+    }
+    .message-wrapper .card{
+        padding:20px
+    }
+    .message-wrapper .block{
+        flex-basis:50%;
+    }
+    .message-wrapper .message-text{
+        clear:both;
+        position:relative;
+        top:5px
+    }
+    .message-wrapper .message-text p{
+        margin:0px
+    }
+
+    .message-wrapper .block hr {
+        border-top: 1px solid #484848 !important;
+    }
+
+
+
+
+</style>
+
+</head>
 <body class="d-flex flex-column h-100" style="background-color: #000000;">
     <header>
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark " style="background-color: #113e42;">
+        <nav class="navbar navbar-expand-md navbar-dark " >
             <a class="navbar-brand" href="/">JugaJug</a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
@@ -50,8 +220,8 @@
     <br>
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0 text-white" style="background-color: #000000;">
-        <div class="container" style="background-color: #000000;">
-            <!--{% if messages %}
+        <div class="container main-container" style="" >
+            {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
                         {{ message }}
@@ -60,7 +230,7 @@
                         </button>
                     </div>
                 {% endfor %}
-            {% endif %}-->
+            {% endif %}
 
             {% block content %}
                 <div class="jumbotron text-center">
@@ -75,7 +245,7 @@
 
     <footer class="footer mt-auto py-3" style="background-color: #000000;">
         <div class="container text-center">
-            <span class="text-muted">&copy; {% now "Y" %} - JugAjUG Team</span>
+            <span class="text-muted">&copy; {% now "Y" %} - JugaJug Team</span>
         </div>
     </footer>
 

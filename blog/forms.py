@@ -13,4 +13,8 @@ class NewCommentForm(forms.ModelForm):
     class Meta:
         model = Comments
         fields = ['Comment']
+        widgets = {
+            'Comment': forms.TextInput(
+                attrs={'placeholder': 'Add a comment'}),
+        }
         labels = {'Comment':''}

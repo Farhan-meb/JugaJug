@@ -2,12 +2,12 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<br>
 {% include 'blog/snippets/list_tabs.html' %}
 {% include 'learning/snippets/list_tabs.html' %}
+<br>
     <div class="row" style="color: black;">
         <div class="col-sm-9">
-            <div class="card">
+            <div class="cardLearning">
                 <div class="card-body">
                     <h3> {{ problem.name }} </h3>
                     <br />
@@ -24,7 +24,7 @@
                     <p> {{ problem.output_section|safe|linebreaks }} </p>
                     <br />
                     <h4> Sample </h4>
-                    <table class="table table-borderless">
+                    <table class="table tableLearning table-borderless">
                         <thead>
                             <tr style="border-bottom: 1px solid grey">
                                 <th width="50%"> Input </th>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="card">
+            <div class="cardLearning">
                 <div class="card-body">
                     <h4> Submit </h4>
                     <br />

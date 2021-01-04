@@ -1,7 +1,8 @@
 {% extends 'blog/base.html' %}
 
+
+
 {% block content %}
-<br>
 {% include 'blog/snippets/list_tabs.html' %}
 <ul class="nav nav-pills nav-stacked">
     <li class="nav-item border border-dark">
@@ -26,19 +27,19 @@
 </ul>
 <br>
 
-    <div class="card" style="color: black;">
+    <div class="card">
         <div class="card-body">
             {% for tutorial in tutorials %}
                 {% for c_user in current_user %}
                     {% if tutorial.score == c_user.score %}
-                        <div class="card mb-2 " style="color: black;">
+                        <div class="cardLearning mb-2" style="color:#000000;">
                             <div class="card-body">
                                 <p>
                                     <div>
                                         <h2 class="font-weight-bold text-center">{{ tutorial.title }}</h2>
                                         <hr>
                                         <p>
-                                            {{ tutorial.content|safe|linebreaks}}
+                                            {{ tutorial.content|safe }}
                                         </p>
                                     </div>
                                 </p>
@@ -47,9 +48,6 @@
                     {% endif %}
                 {% endfor %}
             {% endfor %}
-        <a href="{% url 'learning:problem-list' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white float-right">
-            <b>Next Tutorial</b>
-        </a>
 
         </div>
     </div>

@@ -1,6 +1,5 @@
 from pathlib import Path
 import subprocess
-import resource, os
 
 from learning.models import Submission,Score
 

@@ -6,6 +6,7 @@ from blog.views import (
     BlogUpdateView,
     BlogDetailView,
     BlogDeleteView,
+    postpreference
 )
 
 app_name = 'blog'
@@ -15,4 +16,5 @@ urlpatterns = [
     path('<int:pk>/update/', BlogUpdateView.as_view(), name='blog-update'),
     path('<int:pk>/delete/', BlogDeleteView.as_view(), name='blog-delete'),
     path('<int:pk>/', BlogDetailView.as_view(), name='blog-details'),
+    path('post/<int:postid>/preference/<int:userpreference>/', postpreference, name='postpreference'),
 ]

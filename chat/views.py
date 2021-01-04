@@ -26,27 +26,29 @@ class ChatListView(ListView):
         user_ids = set(user_ids)
         #print(self.request.user.id)
         data['users'] = User.objects.filter(id__in = user_ids)
+        data.update({
+            'dashboard_chat_tab':'active'
+        })
         return data
 
 
 class ChatDetailsView(ListView):
     model = Messages
     template_name = 'chat/chat_details.html'
-    context_object_name = 'messages'
-    paginate_by = 5
+    context_object_name = 'chats'
 
     def get_queryset(self):
         user = self.request.user
-        message = Messages.objects.filter\
+        chats = Messages.objects.filter\
             (Q(sender = user, reciever__id = self.kwargs.get('reciever_id')) |
              Q(reciever = user, sender__id = self.kwargs.get('reciever_id')))\
             .order_by('-created_at')
-        print(message)
-        return message
+        return chats
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
+            'dashboard_chat_tab': 'active',
             'form': NewMessageForm,
         })
         return context

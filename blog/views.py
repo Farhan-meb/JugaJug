@@ -18,7 +18,7 @@ from blog.models import Post,Comments,Preference
 from django.contrib.auth.decorators import login_required
 
 
-class BlogListView(ListView):
+class BlogListView(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'blog/blog_list.html'
     context_object_name = 'blogs'
@@ -44,7 +44,6 @@ class BlogListView(ListView):
             'dashboard_home_tab': 'active'
         })
         return context
-
 
     def get_queryset(self):
         user = self.request.user
@@ -243,3 +242,89 @@ class FollowersListView(ListView):
         return data
 
 
+@login_required
+def postpreference(request, postid, userpreference):
+    if request.method == "POST":
+        eachpost = get_object_or_404(Post, id=postid)
+        obj = ''
+        valueobj = ''
+        print(request.POST.get('post_id'))
+        print(postid)
+        try:
+            obj = Preference.objects.get(user=request.user, post=eachpost)
+            valueobj = obj.value  # value of userpreference
+            valueobj = int(valueobj)
+            userpreference = int(userpreference)
+
+            if valueobj != userpreference:
+                obj.delete()
+
+                upref = Preference()
+                upref.user = request.user
+
+                upref.post = eachpost
+
+                upref.value = userpreference
+
+                if userpreference == 1 and valueobj != 1:
+                    eachpost.likes += 1
+                    eachpost.dislikes -= 1
+                elif userpreference == 2 and valueobj != 2:
+                    eachpost.dislikes += 1
+                    eachpost.likes -= 1
+
+                upref.save()
+
+                eachpost.save()
+
+                context = {'eachpost': eachpost,
+                           'postid': postid}
+
+                return redirect(reverse_lazy('blog:blog-details', kwargs={"pk": postid}))
+
+            elif valueobj == userpreference:
+                obj.delete()
+
+                if userpreference == 1:
+                    eachpost.likes -= 1
+                elif userpreference == 2:
+                    eachpost.dislikes -= 1
+
+                eachpost.save()
+
+                context = {'eachpost': eachpost,
+                           'postid': postid}
+
+                return redirect(reverse_lazy('blog:blog-details', kwargs={"pk": postid}))
+
+        except Preference.DoesNotExist:
+            upref = Preference()
+
+            upref.user = request.user
+
+            upref.post = eachpost
+
+            upref.value = userpreference
+
+            userpreference = int(userpreference)
+
+            if userpreference == 1:
+                eachpost.likes += 1
+            elif userpreference == 2:
+                eachpost.dislikes += 1
+
+            upref.save()
+
+            eachpost.save()
+
+            context = {'eachpost': eachpost,
+                       'postid': postid}
+
+            return redirect(reverse_lazy('blog:blog-details', kwargs={"pk": postid}))
+
+    else:
+        eachpost = get_object_or_404(Post, id=postid)
+        context = {'eachpost': eachpost,
+                   'postid': postid}
+
+        return redirect(reverse_lazy('blog:blog-details', kwargs={"pk": postid}))

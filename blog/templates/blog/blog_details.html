@@ -1,9 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<br>
-{% include 'blog/snippets/list_tabs.html' %}
-    <br><br>
     {% comment %} Breadcrumb {% endcomment %}
     <div class="card mb-2" style="background-color: #113e42;">
                 <div class="card-body">
@@ -24,30 +21,51 @@
                 </div>
 
             </p>
-                <div>
-                    <a href="#" onClick="document.getElementById('likebutton').submit()"><i
-                            class="fas fa-thumbs-up"></i></a> {{blog.likes}} | <a href="#"
-                                                                                  onClick="document.getElementById('dislikebutton').submit()"><i
-                            class="fas fa-thumbs-down"></i></a> {{blog.dislikes}}
-                    </div>
+                <div class="row">
+                <div class="col-12" style="display: flex;">
+                    <small >
+                        <!-- Like Buttons Here -->
+                        <a href="#" onClick="document.getElementById('likebutton_{{blog.id}}').submit()"><i class="fas fa-thumbs-up"></i></a> {{blog.likes}}   |   <a href="#" onClick="document.getElementById('dislikebutton_{{blog.id}}').submit()"><i class="fas fa-thumbs-down"></i></a> {{blog.dislikes}}
+                        <form id="likebutton_{{blog.id}}" method="POST" action="{% url 'blog:postpreference' blog.id 1 %}">
+                            {% csrf_token %}
+                            <input name="post_id" value="{{ blog.id }}" type="hidden"/>
+                        </form>
+                        <form id="dislikebutton_{{blog.id}}" method="POST" action="{% url 'blog:postpreference' blog.id 2 %}">
+                            {% csrf_token %}
+                            <input name="post_id" value="{{ blog.id }}" type="hidden"/>
+                        </form>
+                    </small>
+                    <small style=" margin-left:15px;" >
+                        <a href="{% url 'blog:blog-details' blog.id %}" class="float-right">
+                            <i style=" font-size: 16px;" class="far fa-comment"></i> {{ blog.number_of_comments }} comment(s)
+                        </a>
+                    </small>
+                </div>
+            </div>
                 </div>
             </div>
         {% if blog.author == user %}
-            <div class="d-flex mt-4">
-                <div class="flex-grow-1">
-                    <a href="{% url 'blog:blog-update' blog.id %}" class="btn btn-info"> Edit </a>
-                </div>
-                <div class="flex-grow-1">
-                    <a href="{% url 'blog:blog-delete' blog.id %}" class="btn btn-danger float-right"> Delete </a>
-                </div>
+            <div class="d-flex float-right">
+                <a href="{% url 'blog:blog-update' blog.id %}"><i class="far fa-edit"></i></a>
+                <a href="{% url 'blog:blog-delete' blog.id %}" class="ml-2 delete-contest text-danger"> <i class="far fa-trash-alt" ></i></a>
+
             </div>
             <br><br>
         {% endif %}
-    <div class="row">
-        <div class="col-sm-9">
+
+            {% if user is not None %}
+                <form method="POST" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {{ form | crispy }}
+                        <button  class="btn btn-link float-right" type="submit"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    </fieldset>
+                </form>
+            {% endif %}
+
         <div class="card mb-2" style="background-color: #113e42;">
             <div class="card-body">
-                <legend class=" text-uppercase text-center text-monospace font-weight-bold">Comments</legend>
+                <legend class=" text-uppercase text-center text-monospace font-weight-bold">C o m m e n t s</legend>
                 {% for comment in comments %}
                     <p>
                         <img class="rounded-circle mr-2" style="width: 30px; height: 30px;" src="{{ comment.author.profile.profile_picture.url }}">
@@ -62,21 +80,10 @@
                     <hr>
                 {% endfor %}
             </div>
-        </div></div>
-        <div class="col-sm-3">
-            {% if user is not None %}
-                <form method="POST" enctype="multipart/form-data" novalidate>
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        {{ form | crispy }}
-                    </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-outline-primary float-right" type="submit">Add a comment</button>
-                    </div>
-                </form>
-
-        {% endif %}
         </div>
-    </div>
+        <a href="{% url 'blog-list' %}" class="float-right"><i class="fas fa-caret-left"></i></button></a>
+        <br>
+         </div>
+
 
 {% endblock %}
