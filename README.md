@@ -13,12 +13,13 @@ move to learning section to lear C programming language going through tutorials.
 - ⚡ User list with all the existing user with search option
 - ⚡ Personal profile with personal posts as well as other users profile.
 - ⚡ Restrictions to other users profile it not followed.
+- ⚡ User can see other users last logged in time.
 - ⚡ User can see his following/followers list or others users following/follower list in their profile.
 - ⚡ Setting with options to update profile.
 - ⚡ Learning C section:<br>
       -Tutorial based.<br>
-      -Problems : Contains some specific problem regarding to current tuorial. User need to solve these 
-       problems to move to next tutorail. (Judge runs only c/c++ language)<br>
+      -Problems : Contains some specific problem regarding to current tutorial. User need to solve these 
+       problems to move to next tutorial. (Judge runs only c/c++ language)<br>
       -Submissions : Submission list for the problems of the user with verdict.<br>
 - ⚡ Used : Python, Django, HTML, CSS, Bootstrap, SQLite
 
