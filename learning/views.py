@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count,Q
 from django.shortcuts import render
 from learning.models import (
@@ -17,7 +18,7 @@ from django.views.generic import (
 from learning.forms import SubmissionForm
 
 
-class MainPageView(ListView):
+class MainPageView(LoginRequiredMixin,ListView):
 
     template_name = 'learning/main_page.html'
 
@@ -36,18 +37,12 @@ class MainPageView(ListView):
         return context
 
 
-class ProblemListView(ListView):
+class ProblemListView(LoginRequiredMixin,ListView):
     model = Problem
     context_object_name = 'problems'
     template_name = 'learning/problems_list.html'
 
     def get_queryset(self):
-        """
-        Returns a queryset containing problems in descending order based on the number
-        of people who solved each problem
-        - It uses annotation and aggregation to calculate the problem solution count
-        by number of unique users for each problem
-        """
 
         current_user = self.request.user if self.request.user.is_authenticated else None
         return Problem.objects.annotate(
@@ -72,7 +67,7 @@ class ProblemListView(ListView):
         return context
 
 
-class ProblemDetailView(DetailView):
+class ProblemDetailView(LoginRequiredMixin,DetailView):
     model = Problem
     template_name = 'learning/problem_details.html'
     context_object_name = 'problem'
@@ -88,7 +83,7 @@ class ProblemDetailView(DetailView):
         return context
 
 
-class SubmissionCreateView(CreateView):
+class SubmissionCreateView(LoginRequiredMixin,CreateView):
     model = Submission
     form_class = SubmissionForm
     success_url = reverse_lazy('learning:submission-list')
@@ -99,7 +94,7 @@ class SubmissionCreateView(CreateView):
         return super().form_valid(form)
 
 
-class SubmissionListView(ListView):
+class SubmissionListView(LoginRequiredMixin,ListView):
     model = Submission
     paginate_by = 10
     context_object_name = 'submissions'

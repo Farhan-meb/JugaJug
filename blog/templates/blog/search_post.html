@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+{% include 'blog/snippets/list_tabs.html' %}
+
+{% comment %} Breadcrumb {% endcomment %}
+<div class="text-center"><h2><strong>Search Results </strong></h2></div>
+{% for blog in blogs %}
+<div class="blog-card card mt-4 " style="background-color: #333333;padding:20px 10px 10px">
+    <div class="card-body">
+        <p>
+            <img class="rounded-circle mr-2" style="width: 30px; height: 30px;" src="{{ blog.author.profile.profile_picture.url }}">
+            {% if blog.author == user %}
+                <a class="mr-2 text-white" href="{% url 'user-profile-current' user.username %}">{{ blog.author }}</a>
+            {% else %}
+                <a class="mr-2 text-white" href="{% url 'user-profile' blog.author.profile.user.username %}">{{ blog.author }}</a>
+            {% endif %}
+            <small class="text-muted">{{ blog.created_at|date:"F d, Y" }}</small>
+            <hr/>
+            <div class="border-bottom" >
+                    <a href="{% url 'blog:blog-details' blog.id %}" style="color:#ffffff;"><h2 class="font-weight-bold">{{ blog.title }}</h2></a>
+                    <p>
+                        {{ blog.truncated_content|safe }}
+                        {% if blog.content|length > 500 %}
+                            <a class="read-more" href="{% url 'blog:blog-details' blog.id %}"> Read More </a>
+                        {% endif %}
+                    </p>
+
+            </div>
+        <br>
+            <div class="row">
+                <div class="col-12" style="display: flex;">
+                    <small >
+                        <!-- Like Buttons Here -->
+                        <a href="#" onClick="document.getElementById('likebutton_{{blog.id}}').submit()"><i class="fas fa-thumbs-up"></i></a> {{blog.likes}}   |   <a href="#" onClick="document.getElementById('dislikebutton_{{blog.id}}').submit()"><i class="fas fa-thumbs-down"></i></a> {{blog.dislikes}}
+                        <form id="likebutton_{{blog.id}}" method="POST" action="{% url 'blog:postpreference' blog.id 1 %}">
+                            {% csrf_token %}
+                            <input name="post_id" value="{{ blog.id }}" type="hidden"/>
+                        </form>
+                        <form id="dislikebutton_{{blog.id}}" method="POST" action="{% url 'blog:postpreference' blog.id 2 %}">
+                            {% csrf_token %}
+                            <input name="post_id" value="{{ blog.id }}" type="hidden"/>
+                        </form>
+                    </small>
+                    <small style=" margin-left:15px;" >
+                        <a href="{% url 'blog:blog-details' blog.id %}" class="float-right">
+                            <i style=" font-size: 16px;" class="far fa-comment"></i> {{ blog.number_of_comments }} comment(s)
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </p>
+    </div>
+</div>
+{% endfor %}
+{% include 'blog/snippets/paginations.html' %}
+{% endblock %}

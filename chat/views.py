@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
@@ -7,7 +8,7 @@ from accounts.models import Follow
 from chat.forms import NewMessageForm
 
 
-class ChatListView(ListView):
+class ChatListView(LoginRequiredMixin,ListView):
     model = Follow
     template_name = 'chat/message_list.html'
     context_object_name = 'follows'
@@ -32,7 +33,7 @@ class ChatListView(ListView):
         return data
 
 
-class ChatDetailsView(ListView):
+class ChatDetailsView(LoginRequiredMixin,ListView):
     model = Messages
     template_name = 'chat/chat_details.html'
     context_object_name = 'chats'

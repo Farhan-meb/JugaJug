@@ -34,8 +34,6 @@ def compile_c_cpp_submission(submission, language):
     """
     Check whether extension is matches for chosen language
     """
-    if not check_extension(solution_url, 'cpp' if language == 'C++' else 'c'):
-        result = 'CE'
 
     if result == 'AC':
         for testcase in submission.problem.testcases.all():

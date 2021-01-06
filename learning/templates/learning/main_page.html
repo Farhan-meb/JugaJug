@@ -18,8 +18,13 @@
     </li>
     <li class="nav-item border border-dark nav-link" style="color:orange;">
 
-            {% for c_user in current_user %}
-                Your Current Score : {{c_user.score}}
+            {% for tutorial in tutorials %}
+                {% for c_user in current_user %}
+                    {% if tutorial.score == c_user.score %}
+                        Tutorial : {{tutorial.id}}
+                    {% endif %}
+                {% endfor %}
+
             {% endfor %}
 
     </li>

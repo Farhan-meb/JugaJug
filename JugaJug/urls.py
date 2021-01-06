@@ -1,7 +1,8 @@
 
 from django.contrib import admin
 from django.urls import path,include
-from blog.views import BlogListView,UserProfileView,CurrentUserProfileView,FollowsListView,FollowersListView
+from blog.views import BlogListView
+from accounts.views import UserProfileView,CurrentUserProfileView,FollowsListView,FollowersListView
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 from accounts import views as account_views

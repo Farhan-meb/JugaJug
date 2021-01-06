@@ -2,8 +2,6 @@
 
 {% block content %}
 {% include 'blog/snippets/list_tabs.html' %}
-{% include 'blog/snippets/after_list_tab.html' %}
-
 <div class="container">
     {% if follow == 'follows' %}
          <div class="col-12 no-padding">
@@ -24,13 +22,16 @@
                         {% for follow in follows %}
                             <tr>
                                 <td> {{ forloop.counter }} </td>
-                                <td><a href="#"> <img
+                                <td>
+                                    <a href="#"> <img
                                            class="rounded-circle mr-2"
                                            style="width: 20px; height: 20px;"
                                            src="{{ follow.follow_user.profile.profile_picture.url }}">
-                               <a class="mr-2 text-monospace font-weight-bold text-white" href="{% url 'user-profile' follow.follow_user.profile.user.username %}">
-                                   {{ follow.follow_user.username }}
-                               </a></a></td>
+                                    </a>
+                                    <a class="mr-2 text-monospace font-weight-bold text-white" href="{% url 'user-profile' follow.follow_user.profile.user.username %}">
+                                        {{ follow.follow_user.username }}
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

@@ -3,10 +3,9 @@
 
         <div class="w-100" style="color: #113e42;" >
 
-            <form class="form-inline float-right">
-
-                <input class="form-control  mr-sm-2 border-0" style="color:#113e42; background-color:black;" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary btn-rounded my-2 my-sm-0" type="submit">Search</button>
+            <form method="get" action="{% url 'blog:search-post' %}" class="form-inline float-right">
+                <input  class="form-control  mr-sm-2 border-0" style="color:#113e42; background-color:black;" type="search" placeholder="Search Post" aria-label="Search" name="query" id="query">
+                <button class="btn btn-outline-primary btn-rounded my-2 my-sm-0" type="rsubmit">Search</button>
             </form>
         <a href="{% url 'blog:blog-create' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white">
             <i class="fa fa-plus mr-1" style="color: primary;"></i> New Post

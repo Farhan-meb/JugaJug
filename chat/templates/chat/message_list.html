@@ -2,7 +2,21 @@
 
 {% block content %}
 {% include 'blog/snippets/list_tabs.html' %}
-{% include 'blog/snippets/after_list_tab.html' %}
+{% if user.is_authenticated %}
+<div class="mb-4 d-flex">
+
+        <div class="w-100" style="color: #113e42;" >
+
+            <form method="get" action="{% url 'user-list' %}" class="form-inline float-right">
+                <input  class="form-control  mr-sm-2 border-0" style="color:#113e42; background-color:black;" type="search" placeholder="Search Users" aria-label="Search" name="query" id="query">
+                <button class="btn btn-outline-primary btn-rounded my-2 my-sm-0" type="rsubmit">Search</button>
+            </form>
+    </div>
+</div>
+{% endif %}
+    {% if search %}
+        <div class="text-center"><h2><strong>Search Results </strong></h2></div>
+{% endif %}
 
 <div class="container">
          <div class="col-12 no-padding">
@@ -36,5 +50,6 @@
                 </div>
              </div>
          </div>
-{% include 'blog/snippets/paginations.html' %}
-{% endblock %}
+    {% include 'blog/snippets/paginations.html' %}
+    {% endblock %}
+</div>

@@ -183,7 +183,10 @@
     .message-wrapper .block hr {
         border-top: 1px solid #484848 !important;
     }
-
+    .navbar-nav > li > .dropdown-menu {
+        background-color: #113e42;
+        color: #20aebb;
+    }
 
 
 
@@ -198,15 +201,15 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ user.username }}
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
                                 {% if user.is_superuser %}
-                                    <a class="dropdown-item" href="/admin">Admin Panel</a>
+                                    <a class="dropdown-item" style="color: #20aebb;" href="/admin"><i class="fa fa-cogs" aria-hidden="true"></i> Admin</a>
                                 {% endif %}
-                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                <a class="dropdown-item" style="color: #20aebb;" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                             </div>
                         </li>
                     {% else %}

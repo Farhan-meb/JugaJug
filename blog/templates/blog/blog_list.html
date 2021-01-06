@@ -2,7 +2,21 @@
 
 {% block content %}
 {% include 'blog/snippets/list_tabs.html' %}
-{% include 'blog/snippets/after_list_tab.html' %}
+{% if user.is_authenticated %}
+<div class="mb-4 d-flex">
+
+        <div class="w-100" style="color: #113e42;" >
+
+            <form method="get" action="{% url 'blog:search-post' %}" class="form-inline float-right">
+                <input  class="form-control  mr-sm-2 border-0" style="color:#113e42; background-color:black;" type="search" placeholder="Search Post" aria-label="Search" name="query" id="query">
+                <button class="btn btn-outline-primary btn-rounded my-2 my-sm-0" type="rsubmit">Search</button>
+            </form>
+        <a href="{% url 'blog:blog-create' %}" class="add-blog btn btn-sm btn-outline-primary mr-0 txt-white">
+            <i class="fa fa-plus mr-1" style="color: primary;"></i> New Post
+        </a>
+    </div>
+</div>
+{% endif %}
 
 {% comment %} Breadcrumb {% endcomment %}
 {% for blog in blogs %}
@@ -20,7 +34,7 @@
             <div class="border-bottom" >
                     <a href="{% url 'blog:blog-details' blog.id %}" style="color:#ffffff;"><h2 class="font-weight-bold">{{ blog.title }}</h2></a>
                     <p>
-                        {{ blog.truncated_content|safe|linebreaks }}
+                        {{ blog.truncated_content|safe }}
                         {% if blog.content|length > 500 %}
                             <a class="read-more" href="{% url 'blog:blog-details' blog.id %}"> Read More </a>
                         {% endif %}
