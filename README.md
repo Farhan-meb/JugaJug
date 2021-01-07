@@ -37,6 +37,6 @@ move to learning section to lear C programming language going through tutorials.
 ![](https://github.com/Farhan-meb/JugaJug/blob/master/Screenshots/Screenshot%20from%202021-01-06%2020-50-37.png)
 ![](https://github.com/Farhan-meb/JugaJug/blob/master/Screenshots/Screenshot%20from%202021-01-06%2020-50-41.png)
 ![](https://github.com/Farhan-meb/JugaJug/blob/master/Screenshots/Screenshot%20from%202021-01-06%2020-50-53.png)
-![](https://github.com/Farhan-meb/JugaJug/blob/master/Screenshots/Screenshot%20from%202021-01-07%2022-48-58.png)
 ![](https://github.com/Farhan-meb/JugaJug/blob/master/Screenshots/Screenshot%20from%202021-01-06%2020-50-57.png)
+![](https://github.com/Farhan-meb/JugaJug/blob/master/Screenshots/Screenshot%20from%202021-01-07%2022-48-58.png)
 ![](https://github.com/Farhan-meb/JugaJug/blob/master/Screenshots/Screenshot%20from%202021-01-06%2020-51-12.png)
